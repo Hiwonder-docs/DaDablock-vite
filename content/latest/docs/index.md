@@ -2,7 +2,7 @@
 
 <div class="custom-block note">
   <p class="custom-block-title">NOTE</p>
-  <p>Please select your kit version—Standard Kit, Advanced Kit, or Ultimate Kit—from the version drop-down menu in the top-left sidebar to access
+  <p>Please select your kit version—Starter Kit, Advanced Kit, or Ultimate Kit—from the version drop-down menu in the top-left sidebar to access
    the corresponding tutorials and resources.</p>
 </div>
 
