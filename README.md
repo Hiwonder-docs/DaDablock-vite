@@ -11,7 +11,7 @@ Install dependencies and start the local documentation server:
 ```bash
 npm ci
 npm run dev:latest
-npm run dev:starter-kit
+npm run dev:standard-kit
 npm run dev:advanced-kit
 npm run dev:ultimate-kit
 ```
@@ -28,7 +28,7 @@ The staged production files are generated in:
 
 ```text
 projects/DaDablock/en/latest/
-projects/DaDablock/en/starter-kit/
+projects/DaDablock/en/standard-kit/
 projects/DaDablock/en/advanced-kit/
 projects/DaDablock/en/ultimate-kit/
 ```
@@ -49,7 +49,7 @@ The public-facing URL (via the baota Nginx reverse proxy) is:
 
 ```text
 https://wiki.hiwonder.com/projects/DaDablock/en/latest/docs/index.html
-https://wiki.hiwonder.com/projects/DaDablock/en/starter-kit/docs/1_Product_Introduction.html
+https://wiki.hiwonder.com/projects/DaDablock/en/standard-kit/docs/1_Product_Introduction.html
 https://wiki.hiwonder.com/projects/DaDablock/en/advanced-kit/docs/1_Product_Introduction.html
 https://wiki.hiwonder.com/projects/DaDablock/en/ultimate-kit/docs/1_Product_Introduction.html
 ```
