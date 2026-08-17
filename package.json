@@ -1,4 +1,6 @@
 {
+  "name": "dadablock-vite",
+  "private": true,
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "dev:latest": "node scripts/dev_version.mjs latest",
