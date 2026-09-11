@@ -3102,7 +3102,7 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarSearch",
   __ssrInlineRender: true,
   setup(__props) {
-    const VPLocalSearchBox = defineAsyncComponent(() => import("./VPLocalSearchBox.Ct-M3Jk7.js"));
+    const VPLocalSearchBox = defineAsyncComponent(() => import("./VPLocalSearchBox.DXTe--RN.js"));
     const VPAlgoliaSearchBox = () => null;
     const { theme: theme2 } = useData();
     const loaded = ref(false);
@@ -5873,7 +5873,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _push(ssrRenderComponent(_sfc_main$2, null, null, _parent));
       } else {
         ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(theme).Layout), null, {
-          "nav-screen-content-before": withCtx((_, _push2, _parent2, _scopeId) => {
+          "nav-screen-content-after": withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`<div class="mobile-version-switcher"${_scopeId}><label class="mobile-version-switcher__label" for="mobile-version-select"${_scopeId}>Version</label><select id="mobile-version-select" class="mobile-version-switcher__select"${ssrRenderAttr("value", currentDocumentationVersion.value)} aria-label="Documentation version"${_scopeId}><!--[-->`);
               ssrRenderList(DOCUMENTATION_VERSIONS, (version) => {
