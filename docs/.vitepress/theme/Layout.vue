@@ -8,27 +8,47 @@ import ImageViewer from './ImageViewer.vue'
 const { frontmatter } = useData()
 const route = useRoute()
 
+const DOCUMENTATION_VERSIONS = ['latest', 'standard-kit', 'advanced-kit', 'ultimate-kit']
+const DOCUMENTATION_VERSION_LABELS: Record<string, string> = {
+  latest: 'Latest',
+  'standard-kit': 'Standard Kit',
+  'advanced-kit': 'Advanced Kit',
+  'ultimate-kit': 'Ultimate Kit'
+}
+
+function detectDocumentationVersion(): string {
+  const pathname = inBrowser ? location.pathname : withBase('/')
+  for (const version of DOCUMENTATION_VERSIONS) {
+    if (pathname.includes(`/en/${version}/`)) return version
+  }
+  return DOCUMENTATION_VERSIONS[0]
+}
+
+const currentDocumentationVersion = computed(() => {
+  void route.path
+  return detectDocumentationVersion()
+})
+
+function handleMobileVersionChange(event: Event) {
+  if (!inBrowser) return
+  const targetVersion = (event.target as HTMLSelectElement).value
+  const current = detectDocumentationVersion()
+  if (targetVersion === current) return
+
+  const versionRootPattern = new RegExp(`/en/${current}(?:/.*)?$`)
+  const targetPath = location.pathname.replace(versionRootPattern, `/en/${targetVersion}/`)
+  window.location.replace(`${targetPath}${location.search}${location.hash}`)
+}
+
 function injectVersionSwitcher() {
   if (!inBrowser) return
   const navList = document.querySelector('.VPNavBarMenu')
   if (!navList) return
   if (navList.querySelector('.version-switcher')) return
 
-  const versions = ['latest', 'standard-kit', 'advanced-kit', 'ultimate-kit']
-  const labels: Record<string, string> = {
-    'latest': 'Latest',
-    'standard-kit': 'Standard Kit',
-    'advanced-kit': 'Advanced Kit',
-    'ultimate-kit': 'Ultimate Kit',
-  }
-
-  let current = 'latest'
-  for (const ver of versions) {
-    if (location.pathname.includes(`/en/${ver}/`)) {
-      current = ver
-      break
-    }
-  }
+  const versions = DOCUMENTATION_VERSIONS
+  const labels = DOCUMENTATION_VERSION_LABELS
+  const current = detectDocumentationVersion()
 
   const li = document.createElement('li')
   li.className = 'version-switcher'
@@ -1102,7 +1122,24 @@ onBeforeUnmount(() => {
 
 <template>
   <PageRedirect v-if="isRedirectPage" />
-  <component :is="DefaultTheme.Layout" v-else />
+  <component :is="DefaultTheme.Layout" v-else>
+    <template #nav-screen-content-before>
+      <div class="mobile-version-switcher">
+        <label class="mobile-version-switcher__label" for="mobile-version-select">Version</label>
+        <select
+          id="mobile-version-select"
+          class="mobile-version-switcher__select"
+          :value="currentDocumentationVersion"
+          aria-label="Documentation version"
+          @change="handleMobileVersionChange"
+        >
+          <option v-for="version in DOCUMENTATION_VERSIONS" :key="version" :value="version">
+            {{ DOCUMENTATION_VERSION_LABELS[version] }}
+          </option>
+        </select>
+      </div>
+    </template>
+  </component>
   <slot name="layout-bottom" />
   <ImageViewer
     v-if="lightboxSrc"
